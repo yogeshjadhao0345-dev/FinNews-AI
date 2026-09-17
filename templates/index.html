@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinNews AI — Complex Financial News Made Simple</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=20260916-5" />
+  <link rel="icon" type="image/svg+xml" href="/static/images/robot-mascot.svg" />
+</head>
+<body>
+
+  <!-- ================= MAIN APPLICATION DASHBOARD ================= -->
+  <div class="app-container" id="main-app-container">
+    <!-- Navigation Bar -->
+    <header class="navbar" id="app-top">
+      <a href="/" class="nav-brand">
+        <div class="brand-icon">📈</div>
+        <div>
+          <div class="brand-title">FinNews <span>AI</span></div>
+        </div>
+        <span class="brand-tag">Financial News Simplifier</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="#app-footer" class="nav-dev-badge" id="nav-dev-badge" title="Click to view Developer Info (Yogesh Jadhao)">
+          👨‍💻 Developed by Yogesh Jadhao
+        </a>
+        <div class="badge-pill" id="api-status-pill">
+          <span class="dot dot-green"></span> Live APIs Connected
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-glossary">
+          📖 Jargon Buster
+        </button>
+        <div class="badge-pill" style="background: rgba(16, 185, 129, 0.1); color: #059669; font-weight: 600;">
+          ⚡ Open Access
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          Complex Financial News <br />
+          <span class="gradient-text">Made Simple.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Real news. Clear insights. Smarter decisions. FinNews AI transforms heavy Wall Street jargon and lengthy market reports into concise, plain-English summaries anyone can understand.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-hero" id="btn-fetch-simplify">
+            ⚡ Fetch & Simplify
+          </button>
+          <button class="btn btn-outline btn-hero" id="btn-hero-chat">
+            💬 Ask FinBot Assistant
+          </button>
+        </div>
+
+        <div class="feature-badges">
+          <button class="badge-pill clickable-badge" id="pill-latest-news" title="Click to refresh real-time financial news">
+            <span class="dot dot-green"></span>
+            <strong>Latest News:</strong> Real-time updates
+            <span class="badge-arrow">↗</span>
+          </button>
+          <button class="badge-pill clickable-badge" id="pill-ai-summaries" title="Click to switch all cards to AI Simplified Summaries">
+            <span class="dot dot-purple"></span>
+            <strong>AI-Powered:</strong> Simplified summaries
+            <span class="badge-arrow">↗</span>
+          </button>
+          <button class="badge-pill clickable-badge" id="pill-better-decisions" title="Click to open Market Mood & FinBot Decision Insights">
+            <span class="dot dot-blue"></span>
+            <strong>Better Decisions:</strong> Stay informed easily
+            <span class="badge-arrow">↗</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="mascot-card" id="mascot-ai-card" role="button" tabindex="0" title="Click to activate AI Simplifier across all news">
+          <img src="/static/images/robot-mascot.svg" alt="FinNews AI Mascot" class="mascot-img" />
+          <div class="mascot-tagline">AI Simplifies for Everyone</div>
+          <p class="mascot-subtext">Translating complex market volatility, rate hikes, and corporate balance sheets into everyday knowledge.</p>
+          <span class="mascot-badge">✨ Click to Activate AI Simplification ↗</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Market Overview & Sentiment Bar -->
+    <section class="market-bar" id="market-bar">
+      <div class="mood-indicator">
+        <div class="mood-gauge">
+          <span class="mood-title">Market Sentiment Index</span>
+          <span class="mood-value" id="market-score">--/100</span>
+        </div>
+        <span class="mood-badge sentiment-neutral" id="market-mood-label">Analyzing Mood...</span>
+      </div>
+
+      <div class="market-stats">
+        <div class="stat-item">
+          <span class="stat-num" id="stat-total">0</span>
+          <span class="stat-label">Articles Analyzed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" style="color: var(--bullish);" id="stat-bullish">0</span>
+          <span class="stat-label">Bullish</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num" style="color: var(--bearish);" id="stat-bearish">0</span>
+          <span class="stat-label">Bearish</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls Bar -->
+    <section class="controls-bar" id="news-section">
+      <div class="search-and-lang">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search any financial news, stocks, companies, economy (e.g. Tesla, Nvidia, Gold, Fed, India)..." />
+          <button type="button" id="btn-clear-search" class="btn-clear-search" title="Clear Search" style="display:none;">&times;</button>
+          <button type="button" class="btn btn-primary btn-search-go" id="btn-search-go">Search</button>
+        </div>
+
+        <select id="lang-select" class="select-control" title="Target Language">
+          <option value="English">🌐 English (Plain English)</option>
+          <option value="Spanish">🇪🇸 Spanish (Español)</option>
+          <option value="Hindi">🇮🇳 Hindi (हिन्दी)</option>
+          <option value="Marathi">🇮🇳 Marathi (मराठी)</option>
+          <option value="French">🇫🇷 French (Français)</option>
+          <option value="German">🇩🇪 German (Deutsch)</option>
+        </select>
+      </div>
+
+      <!-- Quick Search / Trending Topics Chips -->
+      <div class="search-chips-container" id="search-chips-bar">
+        <span class="search-chips-label">🔥 Trending Topics:</span>
+        <button class="search-chip" data-query="Nvidia AI">⚡ Nvidia & AI</button>
+        <button class="search-chip" data-query="Federal Reserve interest rates">🏛️ Fed & Rates</button>
+        <button class="search-chip" data-query="Bitcoin crypto ETF">🪙 Bitcoin & Crypto</button>
+        <button class="search-chip" data-query="Crude oil gold prices">🛢️ Crude Oil & Gold</button>
+        <button class="search-chip" data-query="Indian stock market Sensex Nifty">🇮🇳 Indian Markets</button>
+        <button class="search-chip" data-query="Tesla EV earnings">🚗 Tesla & EVs</button>
+        <button class="search-chip" data-query="SP500 stock market rally">📈 S&P 500</button>
+        <button class="search-chip" data-query="Banking sector loans">🏦 Banking & Credit</button>
+      </div>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" data-category="all">🔥 All News</button>
+        <button class="tab-btn" data-category="fed_macro">🏛️ Fed & Economy</button>
+        <button class="tab-btn" data-category="tech_stocks">💻 Tech Stocks & AI</button>
+        <button class="tab-btn" data-category="crypto">🪙 Crypto & Web3</button>
+        <button class="tab-btn" data-category="commodities">🛢️ Commodities</button>
+        <button class="tab-btn" data-category="banking">🏦 Banking & Credit</button>
+        <button class="tab-btn" data-category="custom">✍️ Paste Custom Article</button>
+      </div>
+
+      <!-- Search Results Active Banner -->
+      <div id="search-results-banner" class="search-results-banner" style="display: none;">
+        <div class="banner-text">
+          <span class="banner-icon">🔍</span>
+          <span>Showing results for: <strong id="search-query-display">""</strong> (<span id="search-count-display">0</span> articles found) • <em>Click 🔊 on any card to listen to audio narration</em></span>
+        </div>
+        <button class="btn-clear-banner" id="btn-clear-search-banner">Clear Search ✕</button>
+      </div>
+    </section>
+
+    <!-- Custom Article Simplifier Panel -->
+    <section class="custom-section" id="custom-section">
+      <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Paste Any Financial News or Report</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+        Have an article from Bloomberg, Wall Street Journal, or an SEC earnings filing? Paste it below to generate a simplified breakdown.
+      </p>
+      <textarea id="custom-text-input" class="custom-textarea" placeholder="Paste complex financial article or text here..."></textarea>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-primary" id="btn-simplify-custom">
+          ⚡ Simplify with AI
+        </button>
+      </div>
+      <div id="custom-result" style="margin-top: 24px; display: none;"></div>
+    </section>
+
+    <!-- News Grid -->
+    <main class="news-grid" id="news-grid">
+      <!-- Dynamically populated by app.js -->
+    </main>
+
+    <!-- ================= APPLICATION FOOTER ================= -->
+    <footer class="app-footer" id="app-footer">
+      <div class="footer-container">
+        <!-- Brand & Mission Column -->
+        <div class="footer-brand-section">
+          <div class="footer-brand-header">
+            <div class="footer-logo">📈</div>
+            <div>
+              <h3 class="footer-title">FinNews <span>AI</span></h3>
+              <p class="footer-tagline">Complex Financial News Made Simple</p>
+            </div>
+          </div>
+          <p class="footer-description">
+            Empowering retail investors, students, and everyday savers by transforming dense Wall Street jargon and market volatility reports into clear, actionable intelligence.
+          </p>
+          <div class="footer-badges">
+            <span class="footer-badge">⚡ Real-time Simplification</span>
+            <span class="footer-badge">🤖 FinBot AI Assistant</span>
+            <span class="footer-badge">🌐 Multilingual Audio</span>
+          </div>
+        </div>
+
+        <!-- Developer Credit Card -->
+        <div class="footer-dev-card">
+          <div class="dev-badge-top">Creator & Lead Developer</div>
+          <h2 class="dev-name">Developed by Yogesh Jadhao</h2>
+          <p class="dev-bio">
+            Passionate software engineer building accessible AI tools, finance intelligence platforms, and modern web applications.
+          </p>
+
+          <div class="dev-contact-grid">
+            <!-- Email -->
+            <a href="mailto:yogeshjadhao0345@gmail.com" class="dev-link-chip email-chip" title="Send Email to Yogesh Jadhao">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <span>yogeshjadhao0345@gmail.com</span>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://share.google/kHmdJYelhqUdcXryi" target="_blank" rel="noopener noreferrer" class="dev-link-chip github-chip" title="View GitHub Profile">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/yogesh-jadhao-a88a22383?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="dev-link-chip linkedin-chip" title="Connect on LinkedIn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/yogesh._.jadhao?igsh=MWU3cDVuajB1b2pxbQ==" target="_blank" rel="noopener noreferrer" class="dev-link-chip instagram-chip" title="Follow on Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright & Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div class="footer-bottom-inner">
+          <p>© 2026 <strong>FinNews AI</strong> • Developed by <strong>Yogesh Jadhao</strong>. All rights reserved.</p>
+          <div class="footer-links">
+            <span class="footer-meta-pill">Designed for Clarity & Financial Literacy</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ================= SIDEBAR SCROLL NAVIGATION DOCK (ONLY ONE TOP & ONE BOTTOM) ================= -->
+  <aside class="sidebar-scroll-widget" id="sidebar-scroll-widget" aria-label="Page Scroll Navigation">
+    <div class="scroll-dock-pill">
+      <button class="scroll-dock-btn" id="btn-scroll-top" title="Go directly to Topside of Application" aria-label="Go to Top">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+        <span>Top</span>
+      </button>
+      <button class="scroll-dock-btn" id="btn-scroll-bottom" title="Go directly to Bottom of Application (Developed by Yogesh Jadhao)" aria-label="Go to Bottom">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+        <span>Bottom</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= FLOATING FINBOT CHATBOT WIDGET ================= -->
+  <div class="chatbot-widget-container">
+    <!-- Floating Trigger Button -->
+    <button class="chatbot-float-btn" id="btn-toggle-chatbot" title="Open FinBot Personal Financial Assistant">
+      <div class="chat-btn-icon">
+        <img src="/static/images/robot-mascot.svg" alt="FinBot" />
+      </div>
+      <span class="chat-btn-text">FinBot AI</span>
+      <span class="chat-pulse-dot"></span>
+    </button>
+
+    <!-- Expandable Chatbot Window -->
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">
+            <img src="/static/images/robot-mascot.svg" alt="FinBot" />
+          </div>
+          <div>
+            <div class="chat-title">FinBot AI</div>
+            <div class="chat-status"><span class="dot dot-green"></span> Online Assistant</div>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="chat-action-btn" id="btn-clear-chat" title="Clear Chat">🗑️</button>
+          <button class="chat-action-btn" id="btn-close-chatbot" title="Minimize">&times;</button>
+        </div>
+      </div>
+
+      <!-- Message History Container -->
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg bot-msg">
+          <div class="msg-bubble">
+            👋 <strong>Hi there! I am FinBot</strong>, your personal financial news assistant.
+            <br/><br/>
+            Have a question about today's market trends, interest rate decisions, or complex financial jargon? Ask me below and I will break it down in simple words!
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="chat-quick-chips" id="chat-quick-chips">
+        <button class="chip-btn" data-query="What is today's market sentiment?">📊 Market Sentiment Today</button>
+        <button class="chip-btn" data-query="Explain Fed rate hikes simply">🏛️ Explain Rate Hikes</button>
+        <button class="chip-btn" data-query="What is EBITDA and why does it matter?">💡 What is EBITDA?</button>
+        <button class="chip-btn" data-query="Why are tech stocks rallying?">💻 Tech Stocks Rally</button>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" class="chat-input-field" placeholder="Ask FinBot any financial question..." autocomplete="off" />
+        <button class="btn-chat-send" id="btn-chat-send" title="Send Question">
+          ➤
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Jargon Glossary Modal -->
+  <div class="modal-overlay" id="glossary-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📖 Financial Jargon Buster</h3>
+        <button class="close-btn" id="close-glossary-modal">&times;</button>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px;">
+        Common financial and Wall Street terminology translated into plain, understandable English.
+      </p>
+
+      <div class="form-group">
+        <input type="text" id="glossary-search" class="form-input" placeholder="Search financial terms (e.g., EBITDA, Hawkish, CPI)..." />
+      </div>
+
+      <div id="glossary-list" style="max-height: 50vh; overflow-y: auto; padding-right: 6px;">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Detail Reader Modal -->
+  <div class="modal-overlay" id="article-modal">
+    <div class="modal-box article-modal-box">
+      <div class="article-modal-header">
+        <div class="article-meta-row">
+          <span class="source-badge" id="modal-article-source">Source</span>
+          <span id="modal-article-date" style="font-size: 0.8rem; color: var(--text-muted);">Date</span>
+          <span class="sentiment-tag" id="modal-article-sentiment">Sentiment</span>
+        </div>
+        <button class="close-btn" id="close-article-modal">&times;</button>
+      </div>
+
+      <div class="article-modal-body">
+        <div class="modal-image-wrap" id="modal-image-wrap">
+          <img id="modal-article-img" src="" alt="Article Banner" loading="lazy" />
+        </div>
+
+        <h2 id="modal-article-title" style="font-size: 1.45rem; font-weight: 800; line-height: 1.35; margin: 16px 0 12px; color: #0f172a;"></h2>
+
+        <div class="time-savings-banner" style="margin: 0 0 18px;">
+          <span id="modal-reading-time">⏱️ 1 min simplified read</span>
+          <span id="modal-savings-pill">⚡ 75% time saved</span>
+        </div>
+
+        <!-- AI Simplified Insights Section -->
+        <div class="detail-section">
+          <h4 style="font-size: 0.95rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--primary); margin-bottom: 10px;">
+            ✨ AI Plain-English Breakdown
+          </h4>
+          <div class="simplified-text" id="modal-simplified-text" style="font-size: 1rem; margin-bottom: 18px;"></div>
+
+          <div class="insights-accordion">
+            <div class="insight-pill-box">
+              <strong>📌 What Happened:</strong>
+              <p id="modal-what-happened"></p>
+            </div>
+            <div class="insight-pill-box">
+              <strong>💡 Why It Matters to You:</strong>
+              <p id="modal-why-it-matters"></p>
+            </div>
+            <div class="insight-pill-box">
+              <strong>📊 Market & Dollar Impact:</strong>
+              <p id="modal-market-impact"></p>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <div style="font-weight: 700; font-size: 0.82rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;">
+              Key Takeaways:
+            </div>
+            <ul class="takeaways-list" id="modal-takeaways-list"></ul>
+          </div>
+
+          <!-- Jargon Terms in Article -->
+          <div class="jargon-section" id="modal-jargon-container" style="margin-top: 16px;">
+            <div class="jargon-title">📖 Financial Terms Explained in this Article:</div>
+            <div class="jargon-cloud" id="modal-jargon-cloud"></div>
+          </div>
+        </div>
+
+        <!-- Full Original Content / Link -->
+        <div class="detail-section" style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border);">
+          <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+            Original Article Source & Summary
+          </h4>
+          <p id="modal-original-text" style="font-size: 0.92rem; line-height: 1.6; color: #475569; margin-bottom: 16px;"></p>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" id="modal-btn-speak">
+                🔊 Listen to Audio
+              </button>
+              <button class="btn btn-outline btn-sm" id="modal-btn-copy">
+                📋 Copy Summary
+              </button>
+            </div>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modal-btn-open-original">
+              🔗 Open Original Article on Publisher Site ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="/static/js/app.js?v=20260916-5"></script>
+</body>
+</html>

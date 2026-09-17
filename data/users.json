@@ -1,0 +1,74 @@
+{
+  "demo@finnews.ai": {
+    "id": "usr-demo-001",
+    "name": "Alex Vance",
+    "email": "demo@finnews.ai",
+    "salt": "finnews_demo_salt",
+    "password_hash": "0595946c37297c7f64949becc6eb8329e20fd10e8e83ef9227f6ce6af6704946",
+    "role": "Demo Investor"
+  },
+  "trader_04cf4a@example.com": {
+    "id": "usr-4dbeb908",
+    "name": "Jordan Bell",
+    "email": "trader_04cf4a@example.com",
+    "salt": "ae67c2dc8dca4584",
+    "password_hash": "ddca99d1f58e33319ac36262ed08f74a6971c662472414b5f8a7421ef3a54223",
+    "role": "Retail Investor"
+  },
+  "trader_041ecc@example.com": {
+    "id": "usr-44cd0cd5",
+    "name": "Jordan Bell",
+    "email": "trader_041ecc@example.com",
+    "salt": "4232b6ac718d44fb",
+    "password_hash": "dfc6e2453e402be115567828d3edd2da44e9465900c2a468e4e3f00f0114a20c",
+    "role": "Retail Investor"
+  },
+  "trader_5ce083@example.com": {
+    "id": "usr-7b65372f",
+    "name": "Jordan Bell",
+    "email": "trader_5ce083@example.com",
+    "salt": "a5f0cf3e93ab4dd0",
+    "password_hash": "822a7ce27a29aa980161d3041f32c4579ec58c1d35d5106765b4325bbc1f6443",
+    "role": "Retail Investor"
+  },
+  "trader_d4d5bd@example.com": {
+    "id": "usr-84d222db",
+    "name": "Jordan Bell",
+    "email": "trader_d4d5bd@example.com",
+    "salt": "e131ca788e904dbf",
+    "password_hash": "60572099fbb311a0ae3bace9ade2386bf1fccfe35fa22d96d1a320db2d9ebb35",
+    "role": "Retail Investor"
+  },
+  "trader_7619f4@example.com": {
+    "id": "usr-062af2ba",
+    "name": "Jordan Bell",
+    "email": "trader_7619f4@example.com",
+    "salt": "62157ab415b84c04",
+    "password_hash": "69ee12e397ee69705a951e37984048691f2245004f352453e0dca2dbb482d9e2",
+    "role": "Retail Investor"
+  },
+  "trader_966cfc@example.com": {
+    "id": "usr-a530ffe4",
+    "name": "Jordan Bell",
+    "email": "trader_966cfc@example.com",
+    "salt": "164d91a0032c4271",
+    "password_hash": "965fe4cccdab43cbd239419f6095a0b2483ab3e05149e081e3f63ec77703d869",
+    "role": "Retail Investor"
+  },
+  "trader_8fe153@example.com": {
+    "id": "usr-933a2e8b",
+    "name": "Jordan Bell",
+    "email": "trader_8fe153@example.com",
+    "salt": "79e6a36dcf744b77",
+    "password_hash": "ce2f0a4e995cce35cd331ee7f5fdbc53a3bf34123c619025d9c87034d6914239",
+    "role": "Retail Investor"
+  },
+  "trader_3cd39a@example.com": {
+    "id": "usr-93c30d78",
+    "name": "Jordan Bell",
+    "email": "trader_3cd39a@example.com",
+    "salt": "d0b4c3b7e64649f6",
+    "password_hash": "8608cbc2c1514dd8db290a52b8d412acc23a7073723eef502a8fecd4c0dd7a84",
+    "role": "Retail Investor"
+  }
+}
